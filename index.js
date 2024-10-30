@@ -19,4 +19,18 @@ const getComputerChoice = () => {
   return choice
 }
 
-console.log(getComputerChoice());
+// Create a new function named getHumanChoice.
+// Write the code so that getHumanChoice will return one of the valid choices depending on what the user inputs.
+// Hint: Use the prompt method to get the user’s input.
+
+// Logic to get user choice
+const getHumanChoice = () => {
+  let choice = prompt("Rock, Paper, Scissors?")
+  return choice
+}
+
+let humanScore = 0;
+let computerScore = 0;
+
+console.log(getComputerChoice(), "cpu");
+console.log(getHumanChoice(), "human")
