@@ -18,9 +18,18 @@ const getComputerChoice = () => {
 
 // Logic to get user choice
 const getHumanChoice = () => {
-  let choice = prompt("Rock, Paper, Scissors?")
-  return choice
-}
+  return new Promise((resolve) => {
+    const selectedChoices = document.querySelectorAll(".choice-button");
+
+    // Add event listeners to all buttons
+    selectedChoices.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        console.log(`You selected: ${e.target.innerText}`);
+        resolve(e.target.innerText); // Resolve the promise with the user's choice
+      });
+    });
+  });
+};
 
 const playRound = (humanChoice, computerChoice) => {
   if (humanChoice.toLowerCase() === "rock" && computerChoice === "rock") {
@@ -57,13 +66,13 @@ const playRound = (humanChoice, computerChoice) => {
   }
 }
 
-const playGame = () => {
+const playGame = async () => {
   let humanScore = 0;
   let computerScore = 0;
 
-  for (let i = 0; i < 5; i++) {
-    const computerChoice = getComputerChoice()
-    const humanChoice = getHumanChoice()
+  // for (let i = 0; i < 5; i++) {
+    const computerChoice = getComputerChoice();
+    const humanChoice = await getHumanChoice();
     const result = playRound(humanChoice, computerChoice);
 
     if (result === "human") {
@@ -71,7 +80,7 @@ const playGame = () => {
     } else if (result === "computer") {
       computerScore++;
     }
-  }
+  // }
 
   console.log(`Final Score - Human: ${humanScore}, Computer: ${computerScore}`);
   if (humanScore > computerScore) {
